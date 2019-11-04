@@ -2,9 +2,11 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -32,9 +34,17 @@ public class PHPTravelsTest {
         @Test
         public void PHPTravelBookingTest() throws InterruptedException, IOException, AWTException {
         //Cookies
+
+            driver.findElement(By.xpath("//*[@id=\"usertrack-consent__button\"]")).click();
+
             driver.findElement(By.xpath("//*[@id=\"cookyGotItBtnBox\"]/div/button")).click();
+            Actions actions = new Actions(driver);
+            WebElement target = driver.findElement(By.xpath("//*[@id=\"livechat-eye-catcher-img\"]/img"));
+            actions.moveToElement(target).perform();
+            driver.findElement(By.xpath("//*[@id=\"livechat-eye-catcher\"]/div[1]")).click();
+
         //Select Flights
-            driver.findElement(By.xpath("/html/body/div[1]/div[1]/div[1]/div[3]/div/div/div/div/div/nav/ul/li[2]/a")).click();
+            driver.findElement(By.xpath("/html/body/div[2]/div[1]/div[1]/div[3]/div/div/div/div/div/nav/ul/li[2]/a")).click();
          //Select Round Trip
             driver.findElement(By.xpath("//*[@id=\"flights\"]/div/div/form/div/div[1]/div[1]/div[2]")).click();
          //Select Airports
@@ -78,16 +88,26 @@ public class PHPTravelsTest {
             //Search button
             driver.findElement(By.xpath("//*[@id=\"flights\"]/div/div/form/div/div[2]/div[4]/button")).click();
             //Wybor lotu
+
+            //if (driver.findElement(By.xpath("//*[@id=\"widget-global-so0wizh7hw\"]/div/div/div/div[3]/div[3]/button/svg")).isDisplayed()){
+                //driver.findElement(By.xpath("//*[@id=\"widget-global-wkq27n2voe\"]/div/div/div/div[3]/div[3]/button/svg")).click();
+            //}else{
             driver.findElement(By.xpath("//*[@id=\"LIST\"]/li[1]/div/div[1]/div[2]/form[1]/div[2]/div/button")).click();
             //Screen potwierdzajacy
-            driver.findElement(By.xpath("/html/body/div[1]/div[1]/div/div/div[1]/div/div[1]/aside/a/div[2]")).click();
+            driver.findElement(By.xpath("/html/body/div[2]/div[1]/div/div/div[1]/div/div[1]/aside/a/div[2]")).click();
             Robot robot = new Robot();
             String format = "jpg";
             String fileName = "Screenshot." + format;
             Rectangle screenRect = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
             BufferedImage screenFullImage = robot.createScreenCapture(screenRect);
             ImageIO.write(screenFullImage, format, new File(fileName));
-
+            JavascriptExecutor js = ((JavascriptExecutor) driver);
+            js.executeScript("window.scrollTo(800,1400)");
+            String fileName2 ="Screenshot2." + format;
+            Thread.sleep(500);
+            new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
+            BufferedImage screenFullImage2 = robot.createScreenCapture(screenRect);
+            ImageIO.write(screenFullImage2, format, new File(fileName2));
         }
 
 
