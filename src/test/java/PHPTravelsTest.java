@@ -81,11 +81,10 @@ public class PHPTravelsTest {
             driver.findElement(By.xpath("//*[@id=\"s2id_location_to\"]")).click();
             secondAirportWebElement = driver.findElement(By.xpath("//*[@id=\"select2-drop\"]/div/input"));
             secondAirportWebElement.sendKeys(secondAirport);
-            //WebDriverWait waitSecondAirport = new WebDriverWait(driver, 20);
-            //WebElement secondAirportSelect = waitSecondAirport.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"select2-drop\"]/ul/li[1]")));
-            //secondAirportSelect.click();
-            TimeUnit.SECONDS.sleep(5);
-            driver.findElement(By.xpath("//*[@id=\\\"select2-drop\\\"]/ul/li[1]")).click();
+            WebDriverWait waitSecondAirport = new WebDriverWait(driver, 20);
+            WebElement secondAirportSelect = waitSecondAirport.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"select2-drop\"]/ul/li[1]/div")));
+            secondAirportSelect.click();
+            //driver.findElement(By.xpath("//*[@id=\"select2-drop\"]/ul/li[1]/div")).click();
             //driver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS);
             //DAta
             //driver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS);
@@ -164,7 +163,8 @@ public class PHPTravelsTest {
             WebElement countryWeb = driver.findElement(By.xpath("//*[@id=\"guestform\"]/div[5]/div/div[2]/div/div/input"));
             countryWeb.sendKeys(country);
             driver.findElement(By.xpath("//*[@id=\"guestform\"]/div[5]/div/div[2]/div/ul/li")).click();
-            driver.findElement(By.xpath("//*[@id=\"guestform\"]/div[5]/div/select/option[156]")).click();
+            //driver.findElement(By.xpath("//*[@id=\"guestform\"]/div[5]/div/select/option[156]")).click();
+
             //Gender
 
             driver.findElement(By.xpath("//*[@id=\"title\"]")).click();
@@ -181,6 +181,10 @@ public class PHPTravelsTest {
             driver.findElement(By.xpath("//*[@id=\"email\"]")).click();
             WebElement emailWebBilling = driver.findElement(By.xpath("//*[@id=\"email\"]"));
             emailWebBilling.sendKeys(email);
+            //Phone billing
+            driver.findElement(By.xpath("//*[@id=\"phone\"]")).click();
+            WebElement phoneNumberBilling = driver.findElement(By.xpath("//*[@id=\"phone\"]"));
+            phoneNumberBilling.sendKeys(phoneNumber);
             //Birthday
             driver.findElement(By.xpath("//*[@id=\"birthday\"]")).click();
             birthday = "1992-01-19";
@@ -221,12 +225,15 @@ public class PHPTravelsTest {
             driver.findElement(By.xpath("/html/body/div[2]/div[1]/div[1]/div/div/div[1]/div[2]/div/form/div[5]")).click();
             //Screen potwierdzajacy
             driver.findElement(By.xpath("/html/body/div[2]/div[1]/div/div/div[1]/div/div[1]/aside/a/div[2]")).click();
+            js.executeScript("window.scrollTo(0,0)");
             Robot robot = new Robot();
             String format = "jpg";
             String fileName = "Screenshot." + format;
             Rectangle screenRect = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
             BufferedImage screenFullImage = robot.createScreenCapture(screenRect);
             ImageIO.write(screenFullImage, format, new File(fileName));
+            TimeUnit.SECONDS.sleep(1);
+            driver.findElement(By.xpath("/html/body/div[2]/div[1]/div/div/div[1]/div/div[1]/aside/a/div[2]")).click();
             js.executeScript("window.scrollTo(800,1400)");
             String fileName2 ="Screenshot2." + format;
             TimeUnit.SECONDS.sleep(1);
