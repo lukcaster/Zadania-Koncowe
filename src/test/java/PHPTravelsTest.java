@@ -7,6 +7,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -35,7 +37,6 @@ public class PHPTravelsTest {
     private String creditCardCvvNumber ="";
     private String country = "";
 
-
     @Before
     public void setUp() throws InterruptedException {
         setProperty("webdriver.chrome.driver",
@@ -62,38 +63,43 @@ public class PHPTravelsTest {
          //Select Round Trip
             driver.findElement(By.xpath("//*[@id=\"flights\"]/div/div/form/div/div[1]/div[1]/div[2]")).click();
          //Select Airports
+            //Firs Airport
             String firstAirport = "warsaw";
             WebElement firstAirportWebElement;
-            //Actions actions = new Actions(driver);
-           // WebElement target = driver.findElement(By.className("//*[@class=\"select2-drop select2-display-none select2-with-searchbox select2-drop-active\"]"));
-            //actions.moveToElement(target).perform();
             driver.findElement(By.xpath("//*[@id=\"s2id_location_from\"]")).click();
             firstAirportWebElement = driver.findElement(By.xpath("//*[@id=\"select2-drop\"]/div/input"));
             firstAirportWebElement.sendKeys(firstAirport);
-            Thread.sleep(2000);
-            Assert.assertTrue(driver.findElement(By.xpath("//*[@id=\"select2-drop\"]/ul/li[2]")).isEnabled());
-            driver.findElement(By.xpath("//*[@id=\"select2-drop\"]/ul/li[2]")).click();
+            WebDriverWait waitFirstAirport = new WebDriverWait(driver,20);
+            WebElement firstAirportSelect = waitFirstAirport.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"select2-drop\"]/ul/li[2]")));
+            firstAirportSelect.click();
+
+            //driver.findElement(By.xpath("//*[@id=\\\"select2-drop\\\"]/ul/li[2]")).click();
+            //driver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS);
+            //Second Airport
             String secondAirport = "New york";
             WebElement secondAirportWebElement;
             driver.findElement(By.xpath("//*[@id=\"s2id_location_to\"]")).click();
             secondAirportWebElement = driver.findElement(By.xpath("//*[@id=\"select2-drop\"]/div/input"));
             secondAirportWebElement.sendKeys(secondAirport);
-            Thread.sleep(2000);
-            Assert.assertTrue(driver.findElement(By.xpath("//*[@id=\"select2-drop\"]/ul/li[1]")).isEnabled());
-            driver.findElement(By.xpath("//*[@id=\"select2-drop\"]/ul/li[1]")).click();
-
+            //WebDriverWait waitSecondAirport = new WebDriverWait(driver, 20);
+            //WebElement secondAirportSelect = waitSecondAirport.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"select2-drop\"]/ul/li[1]")));
+            //secondAirportSelect.click();
+            TimeUnit.SECONDS.sleep(5);
+            driver.findElement(By.xpath("//*[@id=\\\"select2-drop\\\"]/ul/li[1]")).click();
+            //driver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS);
             //DAta
+            //driver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS);
             driver.findElement(By.xpath("//*[@id=\"FlightsDateStart\"]")).click();
-            Thread.sleep(500);
+            TimeUnit.SECONDS.sleep(1);
             //Assert.assertTrue(driver.findElement(By.xpath("//*[@id=\"datepickers-container\"]/div[7]/nav/div[2]")).isDisplayed());
             driver.findElement(By.xpath("//*[@id=\"datepickers-container\"]/div[7]/nav/div[2]")).click();
-            Thread.sleep(500);
+            TimeUnit.SECONDS.sleep(1);
             driver.findElement(By.xpath("//*[@id=\"datepickers-container\"]/div[7]/nav/div[3]")).click();
-            Thread.sleep(500);
+            TimeUnit.SECONDS.sleep(1);
             driver.findElement(By.xpath("//*[@id=\"datepickers-container\"]/div[7]/div/div[2]/div/div[1]")).click();
-            Thread.sleep(500);
+            TimeUnit.SECONDS.sleep(1);
             driver.findElement(By.xpath("//*[@id=\"datepickers-container\"]/div[7]/div/div[1]/div[2]/div[27]")).click();
-            Thread.sleep(500);
+            TimeUnit.SECONDS.sleep(1);
             driver.findElement(By.xpath("//*[@id=\"datepickers-container\"]/div[8]/div/div/div[2]/div[34]")).click();
             //Liczba osob
             String liczbaOsob ="";
@@ -152,11 +158,9 @@ public class PHPTravelsTest {
             JavascriptExecutor js = ((JavascriptExecutor) driver);
             js.executeScript("window.scrollTo(600,600)");
            //Country
-            WebElement targetCountry = driver.findElement(By.xpath("//*[@id=\"guestform\"]/div[5]/div/select"));
-            actions.moveToElement(targetCountry).click();
-            //actions.clickAndHold();
-            //((JavascriptExecutor) driver).executeScript("arguments[0].checked = true;", targetCountry);
             country = "Poland";
+            driver.findElement(By.xpath("//*[@id=\"guestform\"]/div[5]/div/div[2]/a/span")).click();
+            TimeUnit.SECONDS.sleep(1);
             WebElement countryWeb = driver.findElement(By.xpath("//*[@id=\"guestform\"]/div[5]/div/div[2]/div/div/input"));
             countryWeb.sendKeys(country);
             driver.findElement(By.xpath("//*[@id=\"guestform\"]/div[5]/div/div[2]/div/ul/li")).click();
@@ -166,30 +170,37 @@ public class PHPTravelsTest {
             driver.findElement(By.xpath("//*[@id=\"title\"]")).click();
             driver.findElement(By.xpath("//*[@id=\"title\"]/option[1]")).click();
             //First Name Billing
+            driver.findElement(By.xpath("//*[@id=\"name\"]")).click();
             WebElement firstNameWebBilling = driver.findElement(By.xpath("//*[@id=\"name\"]"));
             firstNameWebBilling.sendKeys(firstName);
             //Surname Billing
-            WebElement lastNameWebBilling = driver.findElement(By.xpath("//*[@id=\"name\"]"));
+            driver.findElement(By.xpath("//*[@id=\"surname\"]")).click();
+            WebElement lastNameWebBilling = driver.findElement(By.xpath("//*[@id=\"surname\"]"));
             lastNameWebBilling.sendKeys(lastName);
             //Email Billing
+            driver.findElement(By.xpath("//*[@id=\"email\"]")).click();
             WebElement emailWebBilling = driver.findElement(By.xpath("//*[@id=\"email\"]"));
             emailWebBilling.sendKeys(email);
             //Birthday
+            driver.findElement(By.xpath("//*[@id=\"birthday\"]")).click();
             birthday = "1992-01-19";
             WebElement birthdayWeb = driver.findElement(By.xpath("//*[@id=\"birthday\"]"));
             birthdayWeb.sendKeys(birthday);
             //Passport
+            driver.findElement(By.xpath("//*[@id=\"cardno\"]")).click();
             passport = phoneNumber1 + phoneNumber4 + phoneNumber3 + " - " + phoneNumber2 + phoneNumber4 + phoneNumber3 + phoneNumber1;
             WebElement passportWeb = driver.findElement(By.xpath("//*[@id=\"cardno\"]"));
             passportWeb.sendKeys(passport);
             //Passport Expiration date
+            driver.findElement(By.xpath("//*[@id=\"expiration\"]")).click();
             passportExpirationDate = "2020-02-13";
             WebElement passportExpirationDateWeb = driver.findElement(By.xpath("//*[@id=\"expiration\"]"));
             passportExpirationDateWeb.sendKeys(passportExpirationDate);
             //Nationality
+            driver.findElement(By.xpath("//*[@id=\"s2id_nationality\"]/a/span[1]")).click();
+            WebElement nationalityWeb = driver.findElement(By.xpath("//*[@id=\"s2id_autogen1\"]"));
             nationality = "Poland";
-            driver.findElement(By.xpath("//*[@id=\"s2id_nationality\"]")).click();
-            WebElement nationalityWeb = driver.findElement(By.xpath("//*[@id=\"select2-drop\"]/div/input"));
+            //driver.findElement(By.xpath("//*[@id=\"s2id_nationality\"]/a")).click();
             nationalityWeb.sendKeys(nationality);
             driver.findElement(By.xpath("//*[@id=\"select2-drop\"]/ul/li")).click();
             //CARD TYPE
@@ -207,7 +218,7 @@ public class PHPTravelsTest {
             WebElement creditCardCvvNumberWeb = driver.findElement(By.xpath("//*[@id=\"cvv\"]"));
             creditCardCvvNumberWeb.sendKeys(creditCardCvvNumber);
             //Confimration of rules
-            driver.findElement(By.xpath("/html/body/div[2]/div[1]/div/div/div[1]/div/div[2]/div[4]")).click();
+            driver.findElement(By.xpath("/html/body/div[2]/div[1]/div[1]/div/div/div[1]/div[2]/div/form/div[5]")).click();
             //Screen potwierdzajacy
             driver.findElement(By.xpath("/html/body/div[2]/div[1]/div/div/div[1]/div/div[1]/aside/a/div[2]")).click();
             Robot robot = new Robot();
@@ -218,12 +229,12 @@ public class PHPTravelsTest {
             ImageIO.write(screenFullImage, format, new File(fileName));
             js.executeScript("window.scrollTo(800,1400)");
             String fileName2 ="Screenshot2." + format;
-            Thread.sleep(500);
+            TimeUnit.SECONDS.sleep(1);
             new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
             BufferedImage screenFullImage2 = robot.createScreenCapture(screenRect);
             ImageIO.write(screenFullImage2, format, new File(fileName2));
             //Availability
-            Thread.sleep(1000);
+            TimeUnit.SECONDS.sleep(1);
             driver.findElement(By.xpath("//*[@id=\"confirmBooking\"]")).click();
         }
 
