@@ -14,6 +14,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 import static java.lang.System.setProperty;
 
@@ -36,12 +37,13 @@ public class PHPTravelsTest {
 
 
     @Before
-    public void setUp() {
+    public void setUp() throws InterruptedException {
         setProperty("webdriver.chrome.driver",
                 "src/main/resources/drivers/chromedriver.exe");
         driver = new ChromeDriver();
-        driver.get("https://www.phptravels.net/");
         driver.manage().window().maximize();
+        driver.get("https://www.phptravels.net/");
+        TimeUnit.SECONDS.sleep(3);
     }
         @Test
         public void PHPTravelBookingTest() throws InterruptedException, IOException, AWTException {
@@ -68,7 +70,7 @@ public class PHPTravelsTest {
             driver.findElement(By.xpath("//*[@id=\"s2id_location_from\"]")).click();
             firstAirportWebElement = driver.findElement(By.xpath("//*[@id=\"select2-drop\"]/div/input"));
             firstAirportWebElement.sendKeys(firstAirport);
-            Thread.sleep(3000);
+            Thread.sleep(2000);
             Assert.assertTrue(driver.findElement(By.xpath("//*[@id=\"select2-drop\"]/ul/li[2]")).isEnabled());
             driver.findElement(By.xpath("//*[@id=\"select2-drop\"]/ul/li[2]")).click();
             String secondAirport = "New york";
@@ -76,13 +78,13 @@ public class PHPTravelsTest {
             driver.findElement(By.xpath("//*[@id=\"s2id_location_to\"]")).click();
             secondAirportWebElement = driver.findElement(By.xpath("//*[@id=\"select2-drop\"]/div/input"));
             secondAirportWebElement.sendKeys(secondAirport);
-            Thread.sleep(3000);
+            Thread.sleep(2000);
             Assert.assertTrue(driver.findElement(By.xpath("//*[@id=\"select2-drop\"]/ul/li[1]")).isEnabled());
             driver.findElement(By.xpath("//*[@id=\"select2-drop\"]/ul/li[1]")).click();
 
             //DAta
             driver.findElement(By.xpath("//*[@id=\"FlightsDateStart\"]")).click();
-            Thread.sleep(3000);
+            Thread.sleep(500);
             //Assert.assertTrue(driver.findElement(By.xpath("//*[@id=\"datepickers-container\"]/div[7]/nav/div[2]")).isDisplayed());
             driver.findElement(By.xpath("//*[@id=\"datepickers-container\"]/div[7]/nav/div[2]")).click();
             Thread.sleep(500);
@@ -147,15 +149,18 @@ public class PHPTravelsTest {
             String address = street + ", " + town + zipCode;
             WebElement addressWeb = driver.findElement(By.xpath("//*[@id=\"guestform\"]/div[4]/div/input"));
             addressWeb.sendKeys(address);
+            JavascriptExecutor js = ((JavascriptExecutor) driver);
+            js.executeScript("window.scrollTo(600,600)");
            //Country
-            WebElement targetCountry = driver.findElement(By.xpath("//*[@id=\"guestform\"]/div[5]/div/div[2]/a/span"));
-            actions.moveToElement(targetCountry).perform();
-            actions.contextClick();
+            WebElement targetCountry = driver.findElement(By.xpath("//*[@id=\"guestform\"]/div[5]/div/select"));
+            actions.moveToElement(targetCountry).click();
+            //actions.clickAndHold();
+            //((JavascriptExecutor) driver).executeScript("arguments[0].checked = true;", targetCountry);
             country = "Poland";
             WebElement countryWeb = driver.findElement(By.xpath("//*[@id=\"guestform\"]/div[5]/div/div[2]/div/div/input"));
             countryWeb.sendKeys(country);
             driver.findElement(By.xpath("//*[@id=\"guestform\"]/div[5]/div/div[2]/div/ul/li")).click();
-            //driver.findElement(By.xpath("//*[@id=\"guestform\"]/div[5]/div/select/option[156]")).click();
+            driver.findElement(By.xpath("//*[@id=\"guestform\"]/div[5]/div/select/option[156]")).click();
             //Gender
 
             driver.findElement(By.xpath("//*[@id=\"title\"]")).click();
@@ -211,7 +216,6 @@ public class PHPTravelsTest {
             Rectangle screenRect = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
             BufferedImage screenFullImage = robot.createScreenCapture(screenRect);
             ImageIO.write(screenFullImage, format, new File(fileName));
-            JavascriptExecutor js = ((JavascriptExecutor) driver);
             js.executeScript("window.scrollTo(800,1400)");
             String fileName2 ="Screenshot2." + format;
             Thread.sleep(500);
