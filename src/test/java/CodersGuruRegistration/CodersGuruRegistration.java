@@ -14,14 +14,14 @@ import java.util.Random;
 public class CodersGuruRegistration {
     private ChromeDriver driver;
 
-    private String firstName ="";
-    private String lastName ="";
-    private String email ="";
-    private String password ="";
-    private String town ="";
-    private String zipCode ="";
-    private String street = "";
-    private String houseAppartamentNumber ="";
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String password;
+    private String town;
+    private String zipCode;
+    private String street;
+    private String houseAppartamentNumber;
 
 
     @Given("^Web Browser is open with https://tester\\.codersguru\\.pl/$")

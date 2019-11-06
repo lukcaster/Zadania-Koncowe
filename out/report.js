@@ -93,105 +93,105 @@ formatter.match({
   "location": "CodersGuruRegistration.webBrowserIsOpenWithHttpsTesterCodersguruPl()"
 });
 formatter.result({
-  "duration": 4594750400,
+  "duration": 9404741800,
   "status": "passed"
 });
 formatter.match({
   "location": "CodersGuruRegistration.userSelectsButtonCalledZałóżKonto()"
 });
 formatter.result({
-  "duration": 192377400,
+  "duration": 189071200,
   "status": "passed"
 });
 formatter.match({
   "location": "CodersGuruRegistration.userIsOnTheRegisterPageAndSelectsPrywatnieButton()"
 });
 formatter.result({
-  "duration": 102173300,
+  "duration": 58664100,
   "status": "passed"
 });
 formatter.match({
   "location": "CodersGuruRegistration.userFillsEmailInputField()"
 });
 formatter.result({
-  "duration": 200372400,
+  "duration": 127025300,
   "status": "passed"
 });
 formatter.match({
   "location": "CodersGuruRegistration.userFillsFirstNameField()"
 });
 formatter.result({
-  "duration": 76850800,
+  "duration": 63327600,
   "status": "passed"
 });
 formatter.match({
   "location": "CodersGuruRegistration.userFillsLastNameField()"
 });
 formatter.result({
-  "duration": 60005300,
+  "duration": 62873300,
   "status": "passed"
 });
 formatter.match({
   "location": "CodersGuruRegistration.userFillsPasswordFieldWithNotShorterPasswordThanFiveLetters()"
 });
 formatter.result({
-  "duration": 60957600,
+  "duration": 60268600,
   "status": "passed"
 });
 formatter.match({
   "location": "CodersGuruRegistration.userFillsRepeatPasswordFieldWithNotShorterPasswordThanFiveLetters()"
 });
 formatter.result({
-  "duration": 57610400,
+  "duration": 57574300,
   "status": "passed"
 });
 formatter.match({
   "location": "CodersGuruRegistration.userFillsTownField()"
 });
 formatter.result({
-  "duration": 63557900,
+  "duration": 61537000,
   "status": "passed"
 });
 formatter.match({
   "location": "CodersGuruRegistration.userFillsZipCodeFieldMaintainingTheCorrectFormat()"
 });
 formatter.result({
-  "duration": 64883600,
+  "duration": 61611100,
   "status": "passed"
 });
 formatter.match({
   "location": "CodersGuruRegistration.userFillsStreetField()"
 });
 formatter.result({
-  "duration": 64094800,
+  "duration": 65793300,
   "status": "passed"
 });
 formatter.match({
   "location": "CodersGuruRegistration.userFillsNumberOfHouseApartmentMaintainingCorrectFormat()"
 });
 formatter.result({
-  "duration": 52290900,
+  "duration": 56921800,
   "status": "passed"
 });
 formatter.match({
   "location": "CodersGuruRegistration.userSelectsFieldWhichIsCalledZapoznałemSięZRegulaminem()"
 });
 formatter.result({
-  "duration": 49806500,
+  "duration": 52952400,
   "status": "passed"
 });
 formatter.match({
   "location": "CodersGuruRegistration.userSelectsButtonZarejstruj()"
 });
 formatter.result({
-  "duration": 872984100,
+  "duration": 892409600,
   "status": "passed"
 });
 formatter.match({
   "location": "CodersGuruRegistration.userShouldBeRegisteredAndBackOnTheMainPageSeeingZnajdźMentoraButtonWhereTheRegisterButtonWas()"
 });
 formatter.result({
-  "duration": 43660900,
+  "duration": 40325700,
   "status": "passed"
 });
 });
